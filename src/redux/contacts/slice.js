@@ -3,7 +3,7 @@ import {
   addContactsThunk,
   deleteContactThunk,
   fetchContactsThunk,
-} from "../contactsOps";
+} from "./operations";
 
 const initialState = {
   contacts: [], loading: false, error: null ,
@@ -60,4 +60,4 @@ const slice = createSlice({
   },
 });
 
-export const contactsReduser = slice.reducer;
+export const contactsReducer = slice.reducer;
