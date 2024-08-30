@@ -1,12 +1,14 @@
 import { Field, Form, Formik } from "formik";
 import s from "./LoginPage.module.css";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginThunk } from "../../redux/auth/operations";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { useEffect } from "react";
 
 const LoginPage = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const navigate = useNavigate();
 
   const initialValues = { email: "", password: "" };
 
@@ -16,9 +18,11 @@ const LoginPage = () => {
     options.resetForm();
   };
 
-  if (isLoggedIn) {
-    return <Navigate to="/" />;
-  }
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('contacts')
+    }
+  }, [isLoggedIn, navigate])
   return (
     <div className={s.loginPage}>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>

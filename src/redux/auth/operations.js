@@ -18,7 +18,6 @@ export const loginThunk = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await goitApi.post("users/login", credentials);
-      console.log(data);
       setToken(data.token);
       return data;
     } catch (error) {
@@ -43,7 +42,6 @@ export const refreshUserThunk = createAsyncThunk(
     if (savedToken === null) {
       return thunkAPI.rejectWithValue("Token is not exist!");
     }
-    console.log(savedToken);
     try {
       setToken(savedToken);
       const { data } = await goitApi.get("users/current");
